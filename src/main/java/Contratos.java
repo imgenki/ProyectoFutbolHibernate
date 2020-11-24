@@ -14,11 +14,11 @@ public class Contratos {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int codContrato;
 	
-	@ManyToOne (cascade={CascadeType.PERSIST}, fetch=FetchType.EAGER)
+	@ManyToOne (cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
 	@JoinColumn(name = "codDNIoNIE")
 	private Futbolistas futbolista;
 	
-	@ManyToOne (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
+	@ManyToOne (cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
 	@JoinColumn(name = "codEquipo")
 	private Equipos equipo;
 	

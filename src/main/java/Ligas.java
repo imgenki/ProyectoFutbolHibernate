@@ -11,7 +11,7 @@ public class Ligas {
 	String codLiga;
 	@Column(columnDefinition = "varchar(50)")
 	String nomLiga;
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy="liga")
+	@OneToMany(cascade = {CascadeType.ALL, CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy="liga", orphanRemoval = true)
 	private List<Equipos> equipos = new ArrayList<Equipos>();
 
 	

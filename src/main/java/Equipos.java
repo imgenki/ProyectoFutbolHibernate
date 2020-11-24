@@ -22,14 +22,14 @@ public class Equipos {
 	
 	@Column ( columnDefinition = "varchar(60)")
 	private String localidad;
-	@OneToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn (name="codEquipo")
 	private EquiposObservaciones equiposobservacion;
 	
-	@OneToMany (cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="equipo" )
+	@OneToMany (cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="equipo", orphanRemoval = true )
 	List<Contratos> contrato = new ArrayList<Contratos>(); 
 	
-	@ManyToOne (cascade={CascadeType.PERSIST,CascadeType.REFRESH}, fetch=FetchType.EAGER )
+	@ManyToOne (cascade={CascadeType.PERSIST,CascadeType.REFRESH}, fetch=FetchType.LAZY)
 	@JoinColumn(name="codLiga")
 	private Ligas liga;
 	

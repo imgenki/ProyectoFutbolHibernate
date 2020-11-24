@@ -11,15 +11,17 @@ import org.hibernate.internal.build.AllowSysOut;
 import java.util.Scanner;
 
 public class Main {
-	// static Session sesion = HibernateUtil.getSessionFactory().openSession();
-	static SessionFactory miFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-	static Session sesion = miFactory.openSession();
+	static Session sesion;
+//	static SessionFactory miFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+//	static Session sesion = miFactory.openSession();
+	
 	static int opcionElegida;
 
 	public static void main(String[] args) {
 		boolean continuar = true;
 
 		do {
+			sesion = HibernateUtil.getSessionFactory().openSession();
 //		Preguntar opcion
 		System.out.println("Escoja una de las siguientes opciones");
 		System.out.println("1. Insertar Equipo");
@@ -80,7 +82,6 @@ public class Main {
 		System.out.println("¿Desea continuar? (true/false)");
 		continuar = sc.nextBoolean();
 		} while (continuar);
-		sesion.close();
 	}
 
 
@@ -94,7 +95,7 @@ public class Main {
 			
 			System.out.println();
 		}
-		
+		sesion.close();
 	}
 
 	public static void mostrarEquiposContratosFutbolistasLigas() {
@@ -108,7 +109,7 @@ public class Main {
 			}
 			System.out.println();
 		}
-		
+		sesion.close();
 	}
 
 	public static void insertarEquipo() {
@@ -119,7 +120,7 @@ public class Main {
 		sesion.beginTransaction();
 		sesion.save(equipo1);
 		sesion.getTransaction().commit();
-		
+		sesion.close();
 
 	}
 
@@ -137,7 +138,7 @@ public class Main {
 		sesion.save(equipo1);
 		sesion.save(equiObs);
 		sesion.getTransaction().commit();
-		
+		sesion.close();
 	}
 
 	public static void insertarLiga() {
@@ -146,19 +147,19 @@ public class Main {
 		sesion.beginTransaction();
 		sesion.save(liga1);
 		sesion.getTransaction().commit();
-		
+		sesion.close();
 	}
 
 	public static void insertarContrato() {
 
 		Futbolistas futbolista = sesion.get(Futbolistas.class, "399S");
-		Equipos equipo = sesion.get(Equipos.class, 2);
+		Equipos equipo = sesion.get(Equipos.class, 3);
 		Contratos contrato = new Contratos(futbolista, equipo, new Date(2014, 7, 1),
 				new Date(2019, 6, 30), 30000, 50000);
 		sesion.beginTransaction();
 		sesion.save(contrato);
 		sesion.getTransaction().commit();
-		
+		sesion.close();
 	}
 
 	public static void insertarFutbolista() {
@@ -167,7 +168,7 @@ public class Main {
 		sesion.beginTransaction();
 		sesion.save(futbolista);
 		sesion.getTransaction().commit();
-		
+		sesion.close();
 	}
 
 	public static void eliminaEquipo() {
@@ -176,6 +177,7 @@ public class Main {
 		sesion.beginTransaction();
 		sesion.delete(equipo1);
 		sesion.getTransaction().commit();
+		sesion.close();
 		
 	}
 
@@ -187,16 +189,16 @@ public class Main {
 		sesion.beginTransaction();
 		// sesion.update(equipo1);
 		sesion.getTransaction().commit();
-		
+		sesion.close();
 	}
 
 	public static void eliminaContrato() {
-		Contratos contrato = sesion.get(Contratos.class, 3);
+		Contratos contrato = sesion.get(Contratos.class, 7);
 
 		sesion.beginTransaction();
 		sesion.delete(contrato);
 		sesion.getTransaction().commit();
-		
+		sesion.close();
 	}
 
 	public static void actualizaContrato() {
@@ -206,6 +208,6 @@ public class Main {
 		sesion.beginTransaction();
 		// sesion.update(contrato);
 		sesion.getTransaction().commit();
-		
+		sesion.close();
 	}
 }

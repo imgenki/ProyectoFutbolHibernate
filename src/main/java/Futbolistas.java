@@ -16,7 +16,7 @@ public class Futbolistas {
 	@Column(columnDefinition = "varchar(40)")
 	String nacionalidad;
 	
-	@OneToMany (cascade={CascadeType.PERSIST}, fetch=FetchType.EAGER,mappedBy="futbolista")
+	@OneToMany (cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy="futbolista", orphanRemoval = true)
 	List<Contratos> contratos = new ArrayList<Contratos>(); 
 
 	
