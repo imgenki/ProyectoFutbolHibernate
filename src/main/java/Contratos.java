@@ -13,18 +13,24 @@ public class Contratos {
 	@Column(columnDefinition = "integer")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int codContrato;
+	
 	@ManyToOne (cascade={CascadeType.PERSIST}, fetch=FetchType.EAGER)
 	@JoinColumn(name = "codDNIoNIE")
 	private Futbolistas futbolista;
+	
 	@ManyToOne (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	@JoinColumn(name = "codEquipo")
 	private Equipos equipo;
+	
 	@Column (columnDefinition = "date")
 	Date fechaInicio;
+	
 	@Column(columnDefinition = "date")
 	Date fechaFin;
+	
 	@Column(columnDefinition = "integer")
 	int precioAnual;
+	
 	@Column(columnDefinition = "integer")
 	int precioRecision;
 	
